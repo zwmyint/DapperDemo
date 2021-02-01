@@ -11,6 +11,7 @@ namespace DapperDemo.Data
 
         }
 
+        // only for EF Repository
         public DbSet<Company> tbl_Companies { get; set; }
         public DbSet<Employee> tbl_Employees { get; set; }
 
