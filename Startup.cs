@@ -29,8 +29,9 @@ namespace DapperDemo
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DBDefaultConnection")));
 
-            services.AddScoped<ICompanyRepository, CompanyRepository_EF>();
-
+            //
+            //services.AddScoped<ICompanyRepository, CompanyRepository_EF>(); // for EF
+            services.AddScoped<ICompanyRepository, CompanyRepository_DP>(); // for Dapper
 
             
 
