@@ -11,6 +11,7 @@ namespace DapperDemo.Repository
 {
     public class EmployeeRepository_DP : IEmployeeRepository
     {
+        // Dapper
         private IDbConnection _db;
 
         public EmployeeRepository_DP(IConfiguration configuration)

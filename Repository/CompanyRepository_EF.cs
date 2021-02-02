@@ -7,7 +7,7 @@ namespace DapperDemo.Repository
 {
     public class CompanyRepository_EF : ICompanyRepository
     {
-        //
+        // EF
         private readonly ApplicationDbContext _db;
 
         public CompanyRepository_EF(ApplicationDbContext db)

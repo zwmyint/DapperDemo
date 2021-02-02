@@ -1,13 +1,15 @@
 
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using Dapper.Contrib.Extensions;
+//using System.ComponentModel.DataAnnotations;
 
 namespace DapperDemo.Models
 {
+    [Dapper.Contrib.Extensions.Table("tbl_Companies")] // for Dapper Contrib Table
     public class Company
     {
 
-        [Key]
+        [Key] // this key using Dapper.Contrib.Extensions not using DataAnnotations
         public int CompanyId { get; set; }
         public string Name { get; set; }
 
@@ -16,7 +18,7 @@ namespace DapperDemo.Models
         public string State { get; set; }
         public string PostalCode { get; set; }
 
-        //[Write(false)]
+        [Write(false)] // Dapper.Contrib.Extensions, this not write to table
         public List<Employee> Employees { get; set; }
         
     }

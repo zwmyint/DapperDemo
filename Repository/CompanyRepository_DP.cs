@@ -10,7 +10,7 @@ namespace DapperDemo.Repository
 {
     public class CompanyRepository_DP : ICompanyRepository
     {
-
+        // Dapper
         private IDbConnection _db;
 
         public CompanyRepository_DP(IConfiguration configuration)
