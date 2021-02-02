@@ -66,3 +66,8 @@ BEGIN
     WHERE CompanyId  = @CompanyId
 END
 GO
+
+-- Join
+SELECT * FROM tbl_Employees as E
+INNER JOIN tbl_Companies as C 
+ON E.CompanyId = C.CompanyId

@@ -8,6 +8,13 @@ namespace DapperDemo.Models
     [Dapper.Contrib.Extensions.Table("tbl_Companies")] // for Dapper Contrib Table
     public class Company
     {
+        
+        // from bonusrepo - GetAllCompanyWithEmployees
+        public Company()
+        {
+            Employees = new List<Employee>();
+        }
+
 
         [Key] // this key using Dapper.Contrib.Extensions not using DataAnnotations
         public int CompanyId { get; set; }

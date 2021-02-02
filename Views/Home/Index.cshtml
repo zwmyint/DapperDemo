@@ -13,10 +13,12 @@
     </div>
 </div>
 
+<div>&nbsp;</div>
 
-@* @foreach (Company comp in Model)
+@foreach (Company comp in Model)
 {
-    <h1>@comp.Name</h1>
+    <div><h2>[@comp.CompanyId] - @comp.Name</h2></div>
+    <div>
     <table class="table">
         <thead>
             <tr>
@@ -55,4 +57,5 @@
             }
         </tbody>
     </table>
-} *@
+    </div>
+} 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DapperDemo.Models;
 using DapperDemo.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -11,31 +12,37 @@ namespace DapperDemo.Controllers
     {
         private readonly ICompanyRepository _compRepo;
         private readonly IEmployeeRepository _empRepo;
+        private readonly IBonusRepository _bonRepo;
+
 
         //data binding for Create Employee
         [BindProperty]
         public Employee Employee { get; set; }
 
 
-        public EmployeesController(ICompanyRepository compRepo, IEmployeeRepository empRepo)
+        public EmployeesController(ICompanyRepository compRepo, IEmployeeRepository empRepo, IBonusRepository bonRepo)
         {
             _compRepo = compRepo;
             _empRepo = empRepo;
+            _bonRepo = bonRepo;
         }
 
         //
         public IActionResult Index(int companyId=0)
         {
-            //List<Employee> employees = _empRepo.GetAll();
-            //foreach(Employee obj in employees)
-            //{
-            //    obj.Company = _compRepo.Find(obj.CompanyId);
-            //}
+            /* List<Employee> employees = _empRepo.GetAll();
+            foreach(Employee obj in employees)
+            {
+               obj.Company = _compRepo.Find(obj.CompanyId);
+            } */
 
-            //List<Employee> employees = _bonRepo.GetEmployeeWithCompany(companyId);
-            //return View(employees);
-            return View(_empRepo.GetAll());
+            // 1
+            //return View(_empRepo.GetAll());
 
+            // 2
+            List<Employee> employees = _bonRepo.GetEmployeeWithCompany(companyId);
+            return View(employees);
+            
         }
 
         // GET: Employees/Create
@@ -51,7 +58,7 @@ namespace DapperDemo.Controllers
             return View();
         }
 
-        //
+        /* //
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Create")]
@@ -63,7 +70,22 @@ namespace DapperDemo.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(Employee);
+        } */
+
+        // async
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Create")]
+        public async Task<IActionResult> CreatePOST()
+        {
+            if (ModelState.IsValid)
+            {
+                await _empRepo.AddAsync(Employee); // from binding property (not put at parameter)
+                return RedirectToAction(nameof(Index));
+            }
+            return View(Employee);
         }
+
 
         //
         public IActionResult Edit(int? id)
